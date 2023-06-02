@@ -1,0 +1,27 @@
+.custom-button {
+    background-color: rgba(0, 0, 0, 0.3) !important; /* Set translucent background color */
+    color: #ffffff ; /* Set text color */
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-button:hover {
+    background-color: rgba(0, 0, 0, 0.5)!important; /* Change background color on hover */
+  }
+
+  .custom-textfield {
+    & .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+  
+    & .MuiInputLabel-root {
+      color: #ffffff;
+    }
+  }
+  .custom-notched-outline {
+    border-color: white !important;
+  }
+  
+
+  
+  

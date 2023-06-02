@@ -1,0 +1,18 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .navbutton {
+    margin: 0 0  0 30px; /* Adjust the margin as needed */
+  }
+  
+  .logout{
+    margin-left: 200px ;
+    color:red;
+   
+  }
+
+  .logout:hover {
+    color: rgba(255, 0, 0, 1) !important;
+  }
