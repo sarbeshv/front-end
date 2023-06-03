@@ -43,7 +43,6 @@ export default function Home() {
           <tr style={{ color: 'white' }} align="center">
             <th scope="col">#</th>
             <th scope="col">Book Name</th>
-            <th scope="col">Book Id</th>
             <th scope="col">Genre</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -54,7 +53,6 @@ export default function Home() {
             <tr key={book.bookId}>
               <th style={{ color: 'white' }}scope="row">{index + 1}</th>
               <td style={{ color: 'white' }}>{book.bookName}</td>
-              <td style={{ color: 'white' }}>{book.bookId}</td>
               <td style={{ color: 'white' }}>{book.genre}</td>
               <td style={{ color: 'white' }}>{getStatus(book.statusOfBook)}</td>
               <td>

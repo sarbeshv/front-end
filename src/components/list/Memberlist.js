@@ -29,7 +29,7 @@ export default function MemberList() {
 
   return (
     <Container>
-      <Typography variant="h4" component="h2" align="center" className="white-text" gutterBottom>
+      <Typography variant="h3" component="h2" align="center" fontFamily="monotype corsiva" className="white-text" gutterBottom>
         MEMBER LIST
       </Typography>
       <table className="table table-striped">

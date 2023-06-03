@@ -42,7 +42,7 @@ export default function Register() {
       setUserName('');
       setEmail('');
       setPassword('');
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -104,7 +104,7 @@ export default function Register() {
             variant="outlined"
             className="custom-button"
             sx={{ ml: 2 }}
-            to="/login"
+            to="/"
             color="error"
             size="large"
             component={Link}

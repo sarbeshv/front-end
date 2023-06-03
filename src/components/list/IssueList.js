@@ -1,4 +1,4 @@
-import { Button, Container, IconButton, TextField, Typography} from '@mui/material';
+import { Button, Container, IconButton, Snackbar, Typography} from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
@@ -8,6 +8,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function IssueList() {
   const [Issues, setIssues] = useState([]);
+  const [clickedRowIndex, setClickedRowIndex] = useState(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
     loadIssues();
@@ -23,9 +25,11 @@ export default function IssueList() {
     }
   };
 
-  const returnAllIssues = async (id) => {
+  const returnAllIssues = async (id, rowIndex) => {
     await axios.get(`http://localhost:8080/rest/issue/${id}/return/all`);
     loadIssues();
+    setClickedRowIndex(rowIndex);
+    setOpenSnackbar(true);
   };
 
   const formatDate = (dateString) => {
@@ -39,9 +43,14 @@ export default function IssueList() {
     return status === 0 ? "Not Return" : "Books Returned";
   };
 
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+    setClickedRowIndex(null);
+  };
+
   return (
     <Container>
-      <Typography variant="h4" component="h2" fontFamily="monotype corsiva" align="center" style={{ color: 'white' }} gutterBottom>
+      <Typography variant="h3" component="h2" fontFamily="monotype corsiva" align="center" style={{ color: 'white' }} gutterBottom>
         ISSUE LIST
       </Typography>
       <table className="table table-striped">
@@ -49,7 +58,7 @@ export default function IssueList() {
           <tr style={{ color: 'white' }}>
             <th scope="col">#</th>
             <th scope="col">Id</th>
-            <th scope="col">Issue Name</th>
+            <th scope="col">Issued Date</th>
             <th scope="col">Notes</th>
             <th scope="col">Expected Date</th>
             <th scope="col">Status</th>
@@ -66,21 +75,33 @@ export default function IssueList() {
               <td style={{ color: 'white' }}>{formatDate(issue.expectedReturnDate)}</td>
               <td style={{ color: 'white' }}>{getStatus(issue.returned)}</td>
               <td>
-                {issue.returned === 0 && (
+                {issue.returned === 0 && clickedRowIndex !== index && (
                   <Link to={`/viewissue/${issue.id}`}>
                     <IconButton>
-                    <EditIcon />
+                      <EditIcon />
                     </IconButton>
                   </Link>
                 )}
-                <IconButton onClick={() => returnAllIssues(issue.id)}>
-                  <CheckCircleIcon />
-                </IconButton>
+                {issue.returned === 0 && clickedRowIndex !== index && (
+                  <IconButton onClick={() => returnAllIssues(issue.id, index)}>
+                    <CheckCircleIcon />
+                  </IconButton>
+                )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={5000}
+        onClose={handleCloseSnackbar}
+        message="Books returned!"
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      />
     </Container>
   );
 }

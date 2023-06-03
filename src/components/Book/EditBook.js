@@ -94,7 +94,7 @@ export default function EditBookForm() {
           >
             Save
           </Button>
-          <Link to="/">
+          <Link to="/booklist">
             <Button
               sx={{ bgcolor: "#f06292" }}
               variant="contained"

@@ -22,14 +22,14 @@ const Login = () => {
       const response = await axios.post("http://localhost:8080/Login", data);
       console.log(response);
       if (response.data.status === 200) {
-        navigate("/");
+        navigate("/home");
       }
       if (response.data.status === 403) {
         setLoginError("Access denied. Please check your credentials.");
       }
-      // Redirect to another page after successful login
+      
     } catch (error) {
-      // Handle login errors
+
       if (error.response && error.response.status === 403) {
         setLoginError("Access denied. Please check your credentials.");
       } else {

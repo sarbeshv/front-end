@@ -40,7 +40,7 @@ export default function AddIssue() {
   const loadBooks = async () => {
     try {
       const response = await axios.get("http://localhost:8080/books");
-      setBooks(response.data.data.books.filter((book) => book.statusOfBook !== 2));
+      setBooks(response.data.data.books.filter((book) => book.statusOfBook != 2));
     } catch (error) {
       console.error(error);
     }

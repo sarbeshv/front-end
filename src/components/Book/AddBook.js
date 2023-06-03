@@ -8,7 +8,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  OutlinedInput
+  OutlinedInput,
 } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
@@ -18,7 +18,7 @@ export default function AddBook() {
   const [bookData, setBookData] = useState({});
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
@@ -48,25 +48,21 @@ export default function AddBook() {
     }
   };
 
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if (bookData.bookName.length < 4)  {
-      setErrorMessage("Book name should be at least 4 characters long.");
-      setOpenSnackbar(true); // Open the snack bar
 
-    }
-    else if(bookData.author.length < 4) {
+    if (bookData.bookName.length < 4) {
+      setErrorMessage("Book name should be at least 4 characters long.");
+      setOpenSnackbar(true);
+    } else if (bookData.author.length < 4) {
       setErrorMessage("Author should be at least 4 characters long.");
       setOpenSnackbar(true);
-    }
-      else {
+    } else {
       try {
-        // Send formData to the API
         const response = await sendFormData(bookData);
         console.log("bookdata", bookData);
         setErrorMessage("Book Updated!");
-        setOpenSnackbar(true); // Open the success snack bar
+        setOpenSnackbar(true);
         setBookData({});
       } catch (error) {
         console.error(error);
@@ -75,11 +71,10 @@ export default function AddBook() {
         } else {
           setErrorMessage("An error occurred. Please try again.");
         }
-        setOpenSnackbar(true); // Open the error snack bar
+        setOpenSnackbar(true);
       }
-    }       
+    }
   };
-  
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
@@ -94,10 +89,19 @@ export default function AddBook() {
       }}
       maxWidth="sm"
     >
-      <Typography variant="h4" fontFamily="monotype corsiva " align="center" color="white" gutterBottom>
+      <Typography
+        variant="h4"
+        fontFamily="monotype corsiva "
+        align="center"
+        color="white"
+        gutterBottom
+      >
         ADD BOOK
       </Typography>
+
+       
       <form onSubmit={handleSubmit}>
+        
         <TextField
           className="custom-textfield"
           label="bookName"
@@ -106,32 +110,37 @@ export default function AddBook() {
           margin="normal"
           onChange={onInputChange}
           required
-          value={bookData.bookName || ""}
+          value={bookData.bookName}
         />
-      <FormControl fullWidth margin="normal" required>
-  <InputLabel id="genre-label" style={{ color: 'white' }}>Genre</InputLabel>
-  <Select
-    labelId="genre-label"
-    id="genre-select"
-    value={selectedGenre}
-    onChange={handleGenreChange}
-    className="custom-select"
-    input={
-      <OutlinedInput
-        label="Genre"
-        notched
-        classes={{
-          notchedOutline: 'custom-notched-outline',
-        }}
-        style={{ borderColor: 'white', color: 'white' }}
-      />
-    }
-  >
-    <MenuItem value="fiction">Fiction</MenuItem>
-    <MenuItem value="nonfiction">Nonfiction</MenuItem>
-    <MenuItem value="mystery">Mystery</MenuItem>
-  </Select>
-</FormControl>
+        <FormControl fullWidth margin="normal" required>
+          <InputLabel id="genre-label" style={{ color: "white" }}>
+            Genre
+          </InputLabel>
+          <Select
+            labelId="genre-label"
+            id="genre-select"
+            value={selectedGenre}
+            onChange={handleGenreChange}
+            className="custom-select"
+            input={
+              <OutlinedInput
+                label="Genre"
+                notched
+                classes={{
+                  notchedOutline: "custom-notched-outline",
+                }}
+                style={{ borderColor: "white", color: "white" }}
+              />
+            }
+          >
+            <MenuItem value="fiction">Fiction</MenuItem>
+            <MenuItem value="non fiction">Non fiction</MenuItem>
+            <MenuItem value="Biography">Biography</MenuItem>
+            <MenuItem value="Science">Science</MenuItem>
+            <MenuItem value="Magazine">Magazine</MenuItem>
+            <MenuItem value="mystery">Mystery</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           className="custom-textfield"
           label="author"
@@ -140,7 +149,7 @@ export default function AddBook() {
           margin="normal"
           onChange={onInputChange}
           required
-          value={bookData.author || ""}
+          value={bookData.author}
         />
         <Button
           variant="contained"
@@ -166,7 +175,7 @@ export default function AddBook() {
       </form>
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={3000}
+        autoHideDuration={5000}
         onClose={handleCloseSnackbar}
         message="Book submitted!"
         anchorOrigin={{
@@ -177,7 +186,7 @@ export default function AddBook() {
       {errorMessage && (
         <Snackbar
           open={true}
-          autoHideDuration={3000}
+          autoHideDuration={5000}
           onClose={() => setErrorMessage("")}
           message={errorMessage}
           anchorOrigin={{

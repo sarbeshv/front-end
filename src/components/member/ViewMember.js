@@ -69,7 +69,7 @@ export default function ViewBook() {
       </Card>
       <Button
         component={Link}
-        to="/"
+        to="/home"
         variant="contained"
         color="primary"
         sx={{ mt: 4 }}

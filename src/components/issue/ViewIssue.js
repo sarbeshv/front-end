@@ -60,8 +60,8 @@ export default function ViewIssue(props) {
 
   return (
     <div>
-      <Typography variant="h4" component="h2" style={{ color: 'white' }} align="center" gutterBottom>
-        ISSUE LIST
+      <Typography variant="h4" component="h2" fontFamily="monotype corsiva" style={{ color: 'white' }} align="center" gutterBottom>
+        Books Issued
       </Typography>
       <table className="table table-striped">
         <thead>

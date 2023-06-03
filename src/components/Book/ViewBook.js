@@ -44,7 +44,7 @@ export default function ViewBook() {
             <ul style={{ listStyleType: "none", padding: 0 }}>
               <li>
                 <Typography sx={{ fontWeight: "bold", mb: 1 }}>
-                  Id: {book.bookId}
+                  Id: 00{book.bookId}
                 </Typography>
               </li>
               <li>
@@ -73,7 +73,7 @@ export default function ViewBook() {
       </Card>
       <Button
         component={Link}
-        to="/"
+        to="/booklist"
         variant="contained"
         color="primary"
         sx={{ mt: 4 }}
